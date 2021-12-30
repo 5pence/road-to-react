@@ -41,7 +41,11 @@ const App = () => {
     'React');
 
   /*
-  to trigger the side-effect each time the searchTerm changes using React useEffect hook instead of managing the side-effect in the (event) handler makes the app more robust as whereever and whenever the searchTerm state is updated via setSearchTerm, the browser's local storage will always be in sync with it.
+  to trigger the side-effect each time the searchTerm changes using React 
+  useEffect hook instead of managing the side-effect in the (event) handler 
+  makes the app more robust as whereever and whenever the searchTerm state is 
+  updated via setSearchTerm, the browser's local storage will always be in sync 
+  with it.
   */ 
   React.useEffect(() => {
     localStorage.getItem('search', searchTerm);
@@ -51,7 +55,8 @@ const App = () => {
     setSearchTerm(event.target.value);
   }
 
-  const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const searchedStories = stories.filter(story => 
+    story.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div>
