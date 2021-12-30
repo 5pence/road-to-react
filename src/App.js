@@ -3,6 +3,18 @@ import './App.css';
 import List from './components/List';
 import Search from './components/Search';
 
+const useSemiPersistentState = (key, initialState) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(key) || initialState
+  );
+
+  React.useState(() => {
+    localStorage.setItem(key, value);
+  }, [value, key]);
+
+  return [value, setValue];
+}
+
 const App = () => {
   const stories = [
     {
@@ -23,17 +35,15 @@ const App = () => {
     }
   ];
 
-  // useState is a react hook 
-  const [searchTerm, setSearchTerm] = React.useState(
-    localStorage.getItem('search') || 'React'
-  );
+  // useSemiPersistentState is a react hook custom hook 
+  const [searchTerm, setSearchTerm] = useSemiPersistentState(
+    'search', 
+    'React');
 
   // to trigger the side-effect each time the searchTerm changes using React useEffect hook instead of managing the side-effect in the (event) handler makes the app more robust as whereever and whenever the searchTerm state is updated via setSearchTerm, the browser's local storage will always be in sync with it. 
   React.useEffect(() => {
     localStorage.getItem('search', searchTerm);
   }, [searchTerm]);
-  
-console.log([searchTerm])
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
