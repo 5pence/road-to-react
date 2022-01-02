@@ -3,15 +3,14 @@ import React from 'react'
 const List = ({ list }) => {
     return (
         <div>
-            <ul>
+            <ul>        
                 {list.map((item) => (
-                    <li key={item.objectID}>
+                    <li key={item.id}>
                         <span>
                             <a href={item.url}>{item.title}</a>
                         </span> by
-                        <span> {item.author} | </span>
-                        <span>comments: {item.num_comments} | </span>
-                        <span>points: {item.points}</span>
+                        <span> {item.by} | </span>
+                        <span>points: {item.score}</span>
                     </li>
                 ))}
             </ul>
